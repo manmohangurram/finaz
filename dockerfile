@@ -3,7 +3,13 @@
 
     # Install build dependencies
     RUN apt-get update && apt-get install -y \
-        pkg-config libssl-dev sqlite3 libsqlite3-dev build-essential \
+        pkg-config \
+        libssl-dev \
+        libsqlite3-dev \
+        build-essential \
+        clang \
+        libclang-dev \
+        sqlite3 \
         && rm -rf /var/lib/apt/lists/*
     
     WORKDIR /app
