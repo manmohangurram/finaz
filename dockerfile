@@ -33,8 +33,6 @@
     
     # Copy the binary from the build stage
     COPY --from=builder /app/target/release/finaz /usr/local/bin/app
-    
-    EXPOSE 8080
-    
+        
     CMD ["app"]
     
