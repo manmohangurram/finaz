@@ -1,0 +1,10 @@
+services:
+  finaz:
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+    environment:
+      DATABASE_URL: /app/data/finaz
+    volumes:
+      - ./database:/app/data
