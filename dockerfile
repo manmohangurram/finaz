@@ -26,9 +26,6 @@
     # Copy the binary from the build stage
     COPY --from=builder /app/target/release/app /usr/local/bin/app
     
-    # Copy assets if needed (e.g., DB folder)
-    COPY ./data ./data
-    
     EXPOSE 8080
     
     CMD ["app"]

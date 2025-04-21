@@ -7,4 +7,4 @@ services:
     environment:
       DATABASE_URL: /app/data/finaz
     volumes:
-      - ./database:/app/data
+      - ${HOME}/database:/app/data
