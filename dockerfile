@@ -1,13 +1,15 @@
 # -------- Build Stage --------
-    FROM rust:1.86 as builder
+    FROM rust:1.86-slim as builder
 
-    # Install build dependencies
     RUN apt-get update && apt-get install -y \
         pkg-config \
         libssl-dev \
         libsqlite3-dev \
+        build-essential \
         libclang-dev \
         sqlite3 \
+        curl \
+        ca-certificates \
         && rm -rf /var/lib/apt/lists/*
     
     WORKDIR /app
