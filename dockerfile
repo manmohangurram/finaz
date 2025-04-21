@@ -6,8 +6,6 @@
         pkg-config \
         libssl-dev \
         libsqlite3-dev \
-        build-essential \
-        clang \
         libclang-dev \
         sqlite3 \
         && rm -rf /var/lib/apt/lists/*
