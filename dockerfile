@@ -32,7 +32,7 @@
     WORKDIR /app
     
     # Copy the binary from the build stage
-    COPY --from=builder /app/target/release/app /usr/local/bin/app
+    COPY --from=builder /app/target/release/finaz /usr/local/bin/app
     
     EXPOSE 8080
     
