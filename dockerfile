@@ -18,7 +18,9 @@
     
     # Install runtime dependencies
     RUN apt-get update && apt-get install -y \
-        libssl3 sqlite3 \
+        libssl-dev \
+        libsqlite3-0 \
+        sqlite3 \
         && rm -rf /var/lib/apt/lists/*
     
     WORKDIR /app
