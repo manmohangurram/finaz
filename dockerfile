@@ -1,5 +1,5 @@
 # ----------- Build Stage -----------
-    FROM rust:1.86-alpine as builder
+    FROM rust:1.86 as builder
 
     # Install dependencies
     RUN apk add --no-cache \
