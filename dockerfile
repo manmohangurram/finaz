@@ -1,44 +1,35 @@
-# ----------- Build Stage -----------
+# -------- Build Stage --------
     FROM rust:1.86 as builder
 
-    # Install dependencies
-    RUN apk add --no-cache \
-        musl-dev \
-        openssl-dev \
-        pkgconfig \
-        build-base \
-        sqlite-dev
+    # Install build dependencies
+    RUN apt-get update && apt-get install -y \
+        pkg-config libssl-dev sqlite3 libsqlite3-dev build-essential \
+        && rm -rf /var/lib/apt/lists/*
     
-    # Set working directory
     WORKDIR /app
     
-    # Copy entire project
     COPY . .
     
-    # Build the application
+    # Build the release binary
     RUN cargo build --release
     
-    # ----------- Runtime Stage -----------
-    FROM alpine:latest
+    # -------- Runtime Stage --------
+    FROM debian:bullseye-slim
     
     # Install runtime dependencies
-    RUN apk add --no-cache \
-        ca-certificates \
-        libssl3 \
-        sqlite-libs
+    RUN apt-get update && apt-get install -y \
+        libssl3 sqlite3 \
+        && rm -rf /var/lib/apt/lists/*
     
-    # Create data directory
-    RUN mkdir -p /app/data
-    
-    # Set workdir
     WORKDIR /app
     
-    # Copy the built binary
+    # Copy the binary from the build stage
     COPY --from=builder /app/target/release/app /usr/local/bin/app
     
-    # Expose app port
+    # Copy assets if needed (e.g., DB folder)
+    COPY ./data ./data
+    
     EXPOSE 8080
     
-    # Run the app
     CMD ["app"]
     
